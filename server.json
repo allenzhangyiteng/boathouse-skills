@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.boathousecloud/boathouse",
+  "title": "Boat House",
+  "description": "Deploy and share small apps with team login, persistent data, versioned updates and domains.",
+  "version": "1.0.0",
+  "websiteUrl": "https://boathousecloud.com",
+  "repository": {
+    "url": "https://github.com/allenzhangyiteng/boathouse-cloud",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.boathousecloud.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer followed by your Boat House account key. Use the account page advanced MCP settings; never publish this value.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "boathouse",
+  "version": "1.0.0",
+  "description": "Put AI-built apps online with team login, persistent data and sharing. Open-source hosting for small software.",
+  "author": {
+    "name": "Boat House"
+  },
+  "homepage": "https://boathousecloud.com",
+  "repository": "https://github.com/allenzhangyiteng/boathouse-skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "deployment",
+    "hosting",
+    "team-login",
+    "sharing",
+    "domains",
+    "open-source"
+  ]
+}

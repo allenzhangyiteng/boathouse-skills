@@ -1,0 +1,18 @@
+{
+  "name": "boathouse",
+  "owner": {
+    "name": "Boat House",
+    "url": "https://boathousecloud.com"
+  },
+  "plugins": [
+    {
+      "name": "boathouse",
+      "source": "./",
+      "description": "Put AI-built apps online with team login, persistent data and sharing. Open-source hosting for small software.",
+      "version": "1.0.0"
+    }
+  ],
+  "metadata": {
+    "description": "Boat House: open-source hosting and sharing for AI-built apps."
+  }
+}
