@@ -8,6 +8,10 @@ Verified September 20, 2026 with the official public Muse Code
 - Fresh standalone skill/MCP installation and repeated installation.
 - Muse's own skill validator: valid, common Agent Skills profile.
 - Actual Muse runtime discovery of all 41 Boat House MCP tools.
+- A signed-in Meta `muse-spark-1.3` model called the live `prices` MCP tool and
+  correctly reported the $10 organization plan with five lightweight tools.
+  The test exposed only public pricing to Meta; account identity and billing
+  were checked locally. Meta account authorization and model API access passed.
 - An actual Muse tool invocation reached the live managed MCP service and
   returned the explicitly selected QA organization. This transport test used
   a **local scripted model provider**, not Meta's model; no private account
@@ -24,7 +28,8 @@ Verified September 20, 2026 with the official public Muse Code
 
 ## Not yet verified
 
-- End-to-end task completion with a signed-in Meta model or Muse personal agent.
+- A successful hosted deployment driven by the signed-in Meta model, and
+  integration with the separate Muse personal agent on web/mobile.
 - A fresh successful hosted deployment through this connector: the available
   QA organization had no prepaid hosting credit. The core deployment regression
   tests do not replace that live check.

@@ -21,6 +21,16 @@ reviewed checkout rather than overwriting it. Python 3.9+ and Muse Code are
 required. If Muse is not on PATH, pass `--muse /path/to/muse` to the installer.
 Install Muse itself only from https://dev.meta.ai/products/muse-code.
 
+Muse Code also needs its own Meta sign-in and model API access. In the tested
+public build, Meta required a payment method before it enabled that access.
+This is separate from Boat House hosting credit. The agent should start
+`muse login`, open the fresh device-authorization link and verify that the
+command finishes with `Model API access verified`. Signing into Meta's website
+alone does not complete the local authorization. If Meta rejects access for
+missing billing, finish Meta billing first, then start a fresh login; reusing
+an expired device code will not work. Never ask for a password or payment-card
+details in chat.
+
 The installer adds the skill using Muse's own skill installer and adds a
 `boathouse` stdio MCP entry to the user's Muse settings. It preserves other
 settings and servers, makes a private backup before changing existing settings,
