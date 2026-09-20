@@ -2,14 +2,24 @@
 import json
 from pathlib import Path
 import re
+import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 claude = json.loads((ROOT / ".claude-plugin/plugin.json").read_text())
 cursor = json.loads((ROOT / ".cursor-plugin/plugin.json").read_text())
+muse = json.loads((ROOT / ".muse-plugin/plugin.json").read_text())
 market = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())
 server = json.loads((ROOT / "server.json").read_text())
-assert claude["name"] == cursor["name"] == "boathouse"
-assert claude["version"] == cursor["version"] == market["plugins"][0]["version"] == server["version"]
+assert claude["name"] == cursor["name"] == muse["name"] == "boathouse"
+assert claude["version"] == cursor["version"] == muse["version"] == market["plugins"][0]["version"]
+assert muse["schemaVersion"] == 1 and muse["compat"]["manifestDir"] == ".muse-plugin"
+for family in ("skills", "commands"):
+    for entry in muse["capabilities"][family]:
+        assert (ROOT / entry["path"]).is_file()
+adapter = muse["capabilities"]["mcpServers"][0]
+assert adapter["transport"] == "stdio" and set(adapter) == {"id", "transport", "command"}
+assert adapter["command"][0] == "python3" and (ROOT / adapter["command"][1]).is_file()
 assert market["name"] == "boathouse" and market["plugins"][0]["source"] == "./"
 assert (ROOT / cursor["logo"]).is_file()
 assert (ROOT / cursor["skills"]).is_dir()
@@ -28,7 +38,7 @@ patterns = [r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----",
             r"\bbh_[A-Za-z0-9_-]{30,}", r"/(?:Users|home)/[A-Za-z][A-Za-z0-9_.-]+/"]
 count = 0
 for p in ROOT.rglob("*"):
-    if ".git" in p.relative_to(ROOT).parts or not p.is_file():
+    if any(x in p.relative_to(ROOT).parts for x in (".git", "__pycache__")) or not p.is_file():
         continue
     assert not p.is_symlink(), str(p.relative_to(ROOT))
     assert p.suffix not in (".pem", ".key", ".sqlite3", ".db", ".tgz"), p.name
@@ -37,4 +47,5 @@ for p in ROOT.rglob("*"):
     for email in re.findall(r"[\w.+-]+@([\w.-]+\.[A-Za-z]{2,})", text):
         assert email.endswith((".test", ".example", ".invalid")) or email in ("example.com", "example.org", "example.net"), "Non-example email in " + str(p.relative_to(ROOT))
     count += 1
-print(f"Validated {count} public files, two plugin manifests, twenty triggers and registry metadata.")
+print(f"Validated {count} public files, three plugin manifests, twenty triggers and registry metadata.")
+subprocess.run([sys.executable, "-m", "unittest", "discover", "-s", str(ROOT / "tests"), "-q"], check=True)

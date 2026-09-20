@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "name": "boathouse",
+  "displayName": "Boat House",
+  "version": "1.1.0",
+  "description": "Deploy and share small apps with team login, persistent data and a real URL. Uses your existing Boat House connection.",
+  "compat": {"source": "native", "manifestDir": ".muse-plugin"},
+  "capabilities": {
+    "skills": [{"id": "boathouse", "path": "skills/boathouse/SKILL.md", "enabledDefault": true}],
+    "commands": [{"id": "setup", "path": "commands/muse-setup.md", "enabledDefault": true}],
+    "mcpServers": [{"id": "cloud", "transport": "stdio", "command": ["python3", "skills/boathouse/scripts/mcp_bridge.py"]}]
+  }
+}

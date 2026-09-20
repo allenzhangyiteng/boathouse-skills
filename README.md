@@ -2,7 +2,7 @@
 
 **Put your app online. Share it with your team. Keep the code and data yours.**
 
-An Apache 2.0 skill and plugin for [Boat House](https://boathousecloud.com). Use Claude Code, Cursor, Codex or Windsurf to publish a small app with team login, persistent data and a stable HTTPS link. Viewers and editors use the app in a browser; trusted developers can update it from their own agent.
+An Apache 2.0 skill and connector for [Boat House](https://boathousecloud.com). Use Claude Code, Cursor, Codex, Windsurf or Muse Code to publish a small app with team login, persistent data and a stable HTTPS link. Viewers and editors use the app in a browser; trusted developers can update it from their own agent.
 
 ## Install the skill
 
@@ -28,6 +28,19 @@ Inside Claude Code, register the marketplace once, then install:
 ```
 
 Then use `/boathouse:setup` or say **“Put this app online with Boat House.”** This is our own marketplace; do not interpret it as an official-directory approval. The plugin has no startup hooks and contains no credentials.
+
+## Meta Muse / Muse Code
+
+For the current Muse Code release, install the skill and authenticated MCP connector together:
+
+```sh
+git clone https://github.com/allenzhangyiteng/boathouse-skills.git
+python3 boathouse-skills/scripts/install_muse.py
+```
+
+Start a new Muse session, connect Boat House once, then ask **“Put this app online for my team.”** The connector reuses the private connection created by `bh`; no extra API-key copying is needed. It preserves existing Muse settings and keeps its approval controls enabled.
+
+A native Muse plugin manifest is also included for plugin-enabled builds. The public Muse Code 1.3.0-R3401.1 build tested on September 20, 2026 did not enable plugins, so use the MCP installer above. [Full Muse guide, requirements and web/mobile limitations](skills/boathouse/references/muse.md).
 
 ## Connect once
 
@@ -69,4 +82,4 @@ Advanced MCP clients can connect to `https://mcp.boathousecloud.com/mcp` using t
 
 ## Package layout
 
-`skills/boathouse` is the portable skill. `.claude-plugin` contains the Claude plugin and marketplace manifests; `.cursor-plugin` contains Cursor metadata. `commands/setup.md` is the explicit setup command. No private account state or production credentials are included.
+`skills/boathouse` is the portable skill and includes the standard-library MCP adapter. `.claude-plugin` contains the Claude plugin and marketplace manifests; `.cursor-plugin` contains Cursor metadata; `.muse-plugin` contains the native Muse preview manifest. `scripts/install_muse.py` installs the supported Muse Code skill/MCP configuration. No private account state or production credentials are included.

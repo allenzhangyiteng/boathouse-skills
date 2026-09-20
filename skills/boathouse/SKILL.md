@@ -42,6 +42,10 @@ These twenty natural-language requests are supported:
 3. If not connected, send the user to https://boathousecloud.com/account for **Copy connection** and have them paste that message into this conversation. This one-time code is private. The user handles passwords, mailbox verification and payments in the browser; never ask for a raw API key. Follow the copied setup instructions, then verify `bh whoami` and the intended workspace. If a code was already redeemed, check the existing connection before requesting a new one.
 4. Keep the original task moving after connection. An empty hosting balance needs the owner's browser top-up; it does not authorize an automatic card charge.
 
+### Meta Muse and Muse Code
+
+The [Muse connection guide](references/muse.md) covers the current Muse Code MCP installer and preview plugin. When Boat House MCP tools are available, use `whoami` to verify the connection and supply `workspace` explicitly for multi-organization accounts. The adapter reads the same private connection as `bh` on every call, so redeeming a connection code does not require copying another key. Use the CLI for uploading an existing local folder; remote MCP cannot read local paths. For small generated apps, MCP `deploy` accepts an explicit map of safe relative paths to file contents. Keep credentials, `.env` and private files out of that map.
+
 ## Create, publish and verify
 
 - New team app: `bh init my-app --template team`. New static site: `bh init my-site --template static`. Both run offline and refuse existing-file overwrites. Preview using the generated README. Keep an existing project's source/framework; adapt it instead of scaffolding over it.
